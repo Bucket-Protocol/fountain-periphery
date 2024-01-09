@@ -1,0 +1,20 @@
+[package]
+name = "BucketFountainPeriphery"
+version = "0.0.1"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/mainnet" }
+# Bucket
+BucketProtocol = { local = "../v1-core/protocol" }
+# Aftermath
+AftermathAmm = { local = "./aftermath-amm/packages/amm" }
+ProtocolFeeVault = { local = "./aftermath-vault/protocol-fee-vault" }
+InsuranceFund = { local = "./aftermath-vault/insurance-fund" }
+Treasury = { local = "./aftermath-vault/treasury" }
+ReferralVault = { local = "./aftermath-vault/referral-vault" }
+# Fountain
+BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev = "main" }
+KriyaFountain = { git = "https://github.com/Bucket-Protocol/fountain-kriya.git", rev = "main" }
+
+[addresses]
+bucket_fountain_periphery = "0x0"

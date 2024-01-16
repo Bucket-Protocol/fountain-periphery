@@ -7,11 +7,11 @@ Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-fram
 # Bucket
 BucketProtocol = { local = "../v1-core/protocol" }
 # Aftermath
-AftermathAmm = { local = "./aftermath-amm/packages/amm" }
-ProtocolFeeVault = { local = "./aftermath-vault/protocol-fee-vault" }
-InsuranceFund = { local = "./aftermath-vault/insurance-fund" }
-Treasury = { local = "./aftermath-vault/treasury" }
-ReferralVault = { local = "./aftermath-vault/referral-vault" }
+AftermathAmm = { local = "./aftermath-interfaces/packages/amm/amm" }
+ProtocolFeeVault = { local = "./aftermath-interfaces/packages/amm/amm-protocol-fee-vault" }
+InsuranceFund = { local = "./aftermath-interfaces/packages/amm/amm-insurance-fund" }
+Treasury = { local = "./aftermath-interfaces/packages/amm/amm-treasury" }
+ReferralVault = { local = "./aftermath-interfaces/packages/amm/amm-referral-vault" }
 # Cetus
 CetusClmm = { local = "../cetus-lp-vault/cetus-clmm/clmmpool" }
 CetusIntegrate = { local = "../cetus-lp-vault/cetus-clmm/integrate" }

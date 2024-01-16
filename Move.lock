@@ -2,7 +2,7 @@
 
 [move]
 version = 0
-manifest_digest = "BC0648EDDA7A6C987F75B62A3CDCAD7D52C6D1868605923D9AEE8EC24CB5D496"
+manifest_digest = "7EAFDE25A20A022757D24E625A86F82D5AD4FF009506E3D2BABA492AA8912E81"
 deps_digest = "59CF4C5FBF9CA9498217B3AC2BED47AD5D49696CE64F735BE1226EDCEF529664"
 
 dependencies = [
@@ -31,7 +31,7 @@ dependencies = [
 
 [[move.package]]
 name = "AftermathAmm"
-source = { local = "aftermath-amm/packages/amm" }
+source = { local = "aftermath-interfaces/packages/amm/amm" }
 
 dependencies = [
   { name = "AmmMath" },
@@ -41,11 +41,10 @@ dependencies = [
 
 [[move.package]]
 name = "AmmMath"
-source = { local = "aftermath-amm/packages/amm-math" }
+source = { local = "aftermath-interfaces/packages/amm/amm-math" }
 
 dependencies = [
   { name = "Sui" },
-  { name = "utilities" },
 ]
 
 [[move.package]]
@@ -106,7 +105,7 @@ dependencies = [
 
 [[move.package]]
 name = "InsuranceFund"
-source = { local = "aftermath-vault/insurance-fund" }
+source = { local = "aftermath-interfaces/packages/amm/amm-insurance-fund" }
 
 dependencies = [
   { name = "Sui" },
@@ -134,7 +133,7 @@ source = { git = "https://github.com/MystenLabs/sui.git", rev = "framework/mainn
 
 [[move.package]]
 name = "ProtocolFeeVault"
-source = { local = "aftermath-vault/protocol-fee-vault" }
+source = { local = "aftermath-interfaces/packages/amm/amm-protocol-fee-vault" }
 
 dependencies = [
   { name = "InsuranceFund" },
@@ -155,7 +154,7 @@ dependencies = [
 
 [[move.package]]
 name = "ReferralVault"
-source = { local = "aftermath-vault/referral-vault" }
+source = { local = "aftermath-interfaces/packages/amm/amm-referral-vault" }
 
 dependencies = [
   { name = "Sui" },
@@ -197,7 +196,7 @@ dependencies = [
 
 [[move.package]]
 name = "Treasury"
-source = { local = "aftermath-vault/treasury" }
+source = { local = "aftermath-interfaces/packages/amm/amm-treasury" }
 
 dependencies = [
   { name = "Sui" },
@@ -221,7 +220,7 @@ dependencies = [
 
 [[move.package]]
 name = "utilities"
-source = { git = "https://github.com/AftermathFinance/move-interfaces.git", rev = "main", subdir = "packages/utility/utilities" }
+source = { local = "aftermath-interfaces/packages/utility/utilities" }
 
 dependencies = [
   { name = "Sui" },

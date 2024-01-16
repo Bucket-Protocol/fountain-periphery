@@ -19,14 +19,12 @@ module bucket_fountain_periphery::aftermath_fountain {
     use cetus_integrate::router;
     use cetus_clmm::pool::Pool as CetusPool;
     use cetus_clmm::config::GlobalConfig as CetusConfig;
-    use usdc_package::coin::COIN as USDC;
-    use af_lp_package::af_lp::AF_LP;
 
     const EXPECTED_RATIO: u128 = 1_000_000_000_000_000_000; // 50-50
     const SLIPPAGE: u64 = 5_000_000_000_000_000_000; // 5%
     const MAX_LOCK_TIME: u64 = 4_838_400_000;
 
-    public entry fun stake(
+    public entry fun stake<AF_LP, USDC>(
         protocol: &mut BucketProtocol,
         af_pool: &mut Pool<AF_LP>,
         af_pool_registry: &PoolRegistry,
@@ -67,7 +65,7 @@ module bucket_fountain_periphery::aftermath_fountain {
         transfer::public_transfer(proof, recipient);
     }
 
-    public entry fun unstake(
+    public entry fun unstake<AF_LP, USDC>(
         af_pool: &mut Pool<AF_LP>,
         af_pool_registry: &PoolRegistry,
         af_fee_vault: &ProtocolFeeVault,
@@ -114,7 +112,7 @@ module bucket_fountain_periphery::aftermath_fountain {
         transfer::public_transfer(buck_out, recipient);
     }
 
-    public entry fun claim(
+    public entry fun claim<AF_LP>(
         fountain: &mut Fountain<AF_LP, SUI>,
         clock: &Clock,
         proof: &mut StakeProof<AF_LP, SUI>,

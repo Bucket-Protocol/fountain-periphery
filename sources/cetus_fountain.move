@@ -11,14 +11,13 @@ module bucket_fountain_periphery::cetus_fountain {
     use bucket_protocol::buck::{Self, BucketProtocol, BUCK};
     use bucket_fountain::fountain_core::{Self, Fountain, StakeProof};
     use strater_lp_vault::bucketus::{Self, BUCKETUS, BucketusTreasury, CetusLpVault};
-    use usdc_package::coin::COIN as USDC;
 
     const DUST_COLLECTION_ACCOUNT: address = @0xbfd2e22f32d4bcaaf6f12f218fcc26488fdf63f338481e0d4f96e95160d61ba9;
     const UNIT_LIQUIDITY: u128 = 15811389;
     const UNIT_OUTPUT: u128 = 1000000022;
     const MAX_LOCK_TIME: u64 = 4_838_400_000;
 
-    public entry fun stake(
+    public entry fun stake<USDC>(
         protocol: &mut BucketProtocol,
         fountain: &mut Fountain<BUCKETUS, SUI>,
         treasury: &mut BucketusTreasury,
@@ -66,7 +65,7 @@ module bucket_fountain_periphery::cetus_fountain {
         transfer::public_transfer(proof, recipient);
     }
 
-    public entry fun unstake(
+    public entry fun unstake<USDC>(
         fountain: &mut Fountain<BUCKETUS, SUI>,
         treasury: &mut BucketusTreasury,
         vault: &mut CetusLpVault,

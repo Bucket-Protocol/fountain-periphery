@@ -2,22 +2,31 @@
 
 [move]
 version = 0
-manifest_digest = "127B60FB6E9E15ADB1E16537F6998B818093360A81464F8299D7C82D3C71CB5E"
-deps_digest = "8D8E72BAA06E63572166CA7E7F6E159CA2D11E27ADE3961B15E29922A04B0D32"
+manifest_digest = "BC0648EDDA7A6C987F75B62A3CDCAD7D52C6D1868605923D9AEE8EC24CB5D496"
+deps_digest = "59CF4C5FBF9CA9498217B3AC2BED47AD5D49696CE64F735BE1226EDCEF529664"
 
 dependencies = [
+  { name = "AfLpType" },
   { name = "AftermathAmm" },
   { name = "BucketFountain" },
   { name = "BucketProtocol" },
   { name = "CetusClmm" },
   { name = "CetusIntegrate" },
-  { name = "CoinTypes" },
   { name = "InsuranceFund" },
   { name = "ProtocolFeeVault" },
   { name = "ReferralVault" },
   { name = "StraterLpVault" },
   { name = "Sui" },
   { name = "Treasury" },
+  { name = "UsdcType" },
+]
+
+[[move.package]]
+name = "AfLpType"
+source = { local = "coin-types/af-lp-type" }
+
+dependencies = [
+  { name = "Sui" },
 ]
 
 [[move.package]]
@@ -92,14 +101,6 @@ source = { local = "../cetus-lp-vault/cetus-clmm/integrate" }
 
 dependencies = [
   { name = "CetusClmm" },
-  { name = "Sui" },
-]
-
-[[move.package]]
-name = "CoinTypes"
-source = { local = "coin-types" }
-
-dependencies = [
   { name = "Sui" },
 ]
 
@@ -197,6 +198,14 @@ dependencies = [
 [[move.package]]
 name = "Treasury"
 source = { local = "aftermath-vault/treasury" }
+
+dependencies = [
+  { name = "Sui" },
+]
+
+[[move.package]]
+name = "UsdcType"
+source = { local = "coin-types/usdc-type" }
 
 dependencies = [
   { name = "Sui" },

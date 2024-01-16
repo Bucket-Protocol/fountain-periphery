@@ -20,7 +20,8 @@ BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev 
 # Strater Cetus Vault
 StraterLpVault = { local = "../cetus-lp-vault" }
 # Coin Types
-CoinTypes = { local = "./coin-types" }
+UsdcType = { local = "./coin-types/usdc-type" }
+AfLpType = { local = "./coin-types/af-lp-type" }
 
 [addresses]
 bucket_fountain_periphery = "0x0"

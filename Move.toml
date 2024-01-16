@@ -12,9 +12,11 @@ ProtocolFeeVault = { local = "./aftermath-vault/protocol-fee-vault" }
 InsuranceFund = { local = "./aftermath-vault/insurance-fund" }
 Treasury = { local = "./aftermath-vault/treasury" }
 ReferralVault = { local = "./aftermath-vault/referral-vault" }
+# Cetus
+CetusClmm = { local = "./cetus-clmm/clmmpool" }
+CetusIntegrate = { local = "./cetus-clmm/integrate" }
 # Fountain
 BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev = "main" }
-KriyaFountain = { git = "https://github.com/Bucket-Protocol/fountain-kriya.git", rev = "main" }
 
 [addresses]
 bucket_fountain_periphery = "0x0"

@@ -2,15 +2,16 @@
 
 [move]
 version = 0
-manifest_digest = "C59BD633BF8260D699FE0C6C6BD0EB5ADDA4082286A0C5C3995B78CD12E473C4"
-deps_digest = "8227D341C0550A37580C10FA45FE148A465225149C69D179737E0FE454AD6AEC"
+manifest_digest = "CCD32420285C2B16709E0FB2DC4989F248005CDD73C6D0CEB25711A5971733E8"
+deps_digest = "CB99E3BEE139471F3765AE330F855F3B376156AA54F37DEDE11BBE5BB0D3BB74"
 
 dependencies = [
   { name = "AftermathAmm" },
   { name = "BucketFountain" },
   { name = "BucketProtocol" },
+  { name = "CetusClmm" },
+  { name = "CetusIntegrate" },
   { name = "InsuranceFund" },
-  { name = "KriyaFountain" },
   { name = "ProtocolFeeVault" },
   { name = "ReferralVault" },
   { name = "Sui" },
@@ -54,10 +55,13 @@ dependencies = [
 
 [[move.package]]
 name = "BucketOracle"
-source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "test-only", subdir = "" }
+source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "mainnet", subdir = "" }
 
 dependencies = [
+  { name = "Pyth" },
   { name = "Sui" },
+  { name = "SupraOracle" },
+  { name = "SwitchboardStdLib" },
 ]
 
 [[move.package]]
@@ -71,6 +75,25 @@ dependencies = [
 ]
 
 [[move.package]]
+name = "CetusClmm"
+source = { local = "cetus-clmm/clmmpool" }
+
+dependencies = [
+  { name = "IntegerMate" },
+  { name = "MoveSTL" },
+  { name = "Sui" },
+]
+
+[[move.package]]
+name = "CetusIntegrate"
+source = { local = "cetus-clmm/integrate" }
+
+dependencies = [
+  { name = "CetusClmm" },
+  { name = "Sui" },
+]
+
+[[move.package]]
 name = "InsuranceFund"
 source = { local = "aftermath-vault/insurance-fund" }
 
@@ -79,20 +102,18 @@ dependencies = [
 ]
 
 [[move.package]]
-name = "KriyaDEX"
-source = { git = "https://github.com/Bucket-Protocol/fountain-kriya.git", rev = "main", subdir = "kriya" }
+name = "IntegerMate"
+source = { local = "cetus-integrate-mate" }
 
 dependencies = [
   { name = "Sui" },
 ]
 
 [[move.package]]
-name = "KriyaFountain"
-source = { git = "https://github.com/Bucket-Protocol/fountain-kriya.git", rev = "main", subdir = "" }
+name = "MoveSTL"
+source = { local = "cetus-move-stl" }
 
 dependencies = [
-  { name = "BucketFountain" },
-  { name = "KriyaDEX" },
   { name = "Sui" },
 ]
 
@@ -113,6 +134,15 @@ dependencies = [
 ]
 
 [[move.package]]
+name = "Pyth"
+source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "mainnet", subdir = "partners/pyth" }
+
+dependencies = [
+  { name = "Sui" },
+  { name = "Wormhole" },
+]
+
+[[move.package]]
 name = "ReferralVault"
 source = { local = "aftermath-vault/referral-vault" }
 
@@ -129,6 +159,23 @@ dependencies = [
 ]
 
 [[move.package]]
+name = "SupraOracle"
+source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "mainnet", subdir = "partners/supra" }
+
+dependencies = [
+  { name = "Sui" },
+]
+
+[[move.package]]
+name = "SwitchboardStdLib"
+source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "mainnet", subdir = "partners/switchboard" }
+
+dependencies = [
+  { name = "MoveStdlib" },
+  { name = "Sui" },
+]
+
+[[move.package]]
 name = "Treasury"
 source = { local = "aftermath-vault/treasury" }
 
@@ -137,8 +184,16 @@ dependencies = [
 ]
 
 [[move.package]]
+name = "Wormhole"
+source = { git = "https://github.com/Bucket-Protocol/oracle.git", rev = "mainnet", subdir = "partners/pyth/wormhole" }
+
+dependencies = [
+  { name = "Sui" },
+]
+
+[[move.package]]
 name = "utilities"
-source = { git = "https://github.com/AftermathFinance/move-interfaces", rev = "main", subdir = "packages/utility/utilities/" }
+source = { git = "https://github.com/AftermathFinance/move-interfaces.git", rev = "main", subdir = "packages/utility/utilities" }
 
 dependencies = [
   { name = "Sui" },

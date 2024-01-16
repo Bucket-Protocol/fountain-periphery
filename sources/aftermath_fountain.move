@@ -6,15 +6,19 @@ module bucket_fountain_periphery::aftermath_fountain {
     use sui::tx_context::TxContext;
     use sui::clock::Clock;
     use sui::transfer;
-    use bucket_protocol::buck::{Self, BucketProtocol};
-    use bucket_fountain::fountain_core::{Self, Fountain};
+    use bucket_protocol::buck::{Self, BucketProtocol, BUCK};
+    use bucket_fountain::fountain_core::{Self, Fountain, StakeProof};
     use amm::pool::Pool;
     use amm::pool_registry::PoolRegistry;
     use amm::deposit as af_deposit;
+    use amm::withdraw as af_withdraw;
     use protocol_fee_vault::vault::ProtocolFeeVault;
     use insurance_fund::insurance_fund::InsuranceFund;
     use referral_vault::referral_vault::ReferralVault;
     use treasury::treasury::Treasury;
+    use cetus_integrate::router;
+    use cetus_clmm::pool::Pool as CetusPool;
+    use cetus_clmm::config::GlobalConfig as CetusConfig;
     use 0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN as USDC;
     use 0xf1b901d93cc3652ee26e8d88fff8dc7b9402b2b2e71a59b244f938a140affc5e::af_lp::AF_LP;
 
@@ -61,5 +65,66 @@ module bucket_fountain_periphery::aftermath_fountain {
             ctx,
         );
         transfer::public_transfer(proof, recipient);
+    }
+
+    public entry fun unstake(
+        af_pool: &mut Pool<AF_LP>,
+        af_pool_registry: &PoolRegistry,
+        af_fee_vault: &ProtocolFeeVault,
+        af_treasury: &mut Treasury,
+        af_insurance: &mut InsuranceFund,
+        af_referral_vault: &ReferralVault,
+        cetus_config: &CetusConfig,
+        cetus_pool: &mut CetusPool<BUCK, USDC>,
+        fountain: &mut Fountain<AF_LP, SUI>,
+        clock: &Clock,
+        proof: StakeProof<AF_LP, SUI>,
+        recipient: address,
+        ctx: &mut TxContext,
+    ) {
+        let (af_lp, sui_reward) = fountain_core::force_unstake(clock, fountain, proof);
+        let af_lp_coin = coin::from_balance(af_lp, ctx);
+        let (usdc_coin, buck_coin) = af_withdraw::all_coin_withdraw_2_coins(
+            af_pool,
+            af_pool_registry,
+            af_fee_vault,
+            af_treasury,
+            af_insurance,
+            af_referral_vault,
+            af_lp_coin,
+            ctx,
+        );
+        let buck_value = coin::value(&buck_coin);
+        let (buck_out, usdc_out) = router::swap(
+            cetus_config,
+            cetus_pool,
+            buck_coin,
+            usdc_coin,
+            true,
+            true,
+            buck_value,
+            4295048016_u128,
+            false,
+            clock,
+            ctx,
+        );
+        let sui_reward = coin::from_balance(sui_reward, ctx);
+        transfer::public_transfer(sui_reward, recipient);
+        transfer::public_transfer(usdc_out, recipient);
+        transfer::public_transfer(buck_out, recipient);
+    }
+
+    public entry fun claim(
+        fountain: &mut Fountain<AF_LP, SUI>,
+        clock: &Clock,
+        proof: &mut StakeProof<AF_LP, SUI>,
+        recipient: address,
+        ctx: &mut TxContext,
+    ) {
+        let sui_reward = fountain_core::claim(
+            clock, fountain, proof,
+        );
+        let sui_reward = coin::from_balance(sui_reward, ctx);
+        transfer::public_transfer(sui_reward, recipient);
     }
 }

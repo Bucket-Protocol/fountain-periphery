@@ -41,7 +41,7 @@ module bucket_fountain_periphery::cetus_fountain {
             ctx,
         );
         let (buck_amount, usdc_amount) = pool::add_liquidity_pay_amount(&receipt);
-        let usdc_to_charge = coin::split(&mut usdc_coin, buck_amount/999 + 10, ctx);
+        let usdc_to_charge = coin::split(&mut usdc_coin, buck_amount/999 + 1000, ctx);
         let buck_all = buck::charge_reservoir<USDC>(protocol, coin::into_balance(usdc_to_charge));
         let buck_all = coin::from_balance(buck_all, ctx);
         let buck_in = coin::split(&mut buck_all, buck_amount, ctx);

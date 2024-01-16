@@ -20,8 +20,8 @@ module bucket_fountain_periphery::aftermath_fountain {
     use cetus_clmm::pool::Pool as CetusPool;
     use cetus_clmm::config::GlobalConfig as CetusConfig;
 
-    const EXPECTED_RATIO: u128 = 1_000_000_000_000_000_000; // 50-50
-    const SLIPPAGE: u64 = 5_000_000_000_000_000_000; // 5%
+    const EXPECTED_RATIO: u128 = 999994678035526528;
+    const SLIPPAGE: u64 = 1000000000000000000;
     const MAX_LOCK_TIME: u64 = 4_838_400_000;
 
     public entry fun stake<AF_LP, USDC>(

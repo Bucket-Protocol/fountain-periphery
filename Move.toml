@@ -13,10 +13,12 @@ InsuranceFund = { local = "./aftermath-vault/insurance-fund" }
 Treasury = { local = "./aftermath-vault/treasury" }
 ReferralVault = { local = "./aftermath-vault/referral-vault" }
 # Cetus
-CetusClmm = { local = "./cetus-clmm/clmmpool" }
-CetusIntegrate = { local = "./cetus-clmm/integrate" }
+CetusClmm = { local = "../cetus-lp-vault/cetus-clmm/clmmpool" }
+CetusIntegrate = { local = "../cetus-lp-vault/cetus-clmm/integrate" }
 # Fountain
 BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev = "main" }
+# Strater Cetus Vault
+StraterLpVault = { local = "../cetus-lp-vault" }
 
 [addresses]
 bucket_fountain_periphery = "0x0"

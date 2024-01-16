@@ -2,8 +2,8 @@
 
 [move]
 version = 0
-manifest_digest = "CCD32420285C2B16709E0FB2DC4989F248005CDD73C6D0CEB25711A5971733E8"
-deps_digest = "CB99E3BEE139471F3765AE330F855F3B376156AA54F37DEDE11BBE5BB0D3BB74"
+manifest_digest = "F86C5299775DA3EC2BB3324BBC57551BADEDB29A97C860B95FCA6148427E44BE"
+deps_digest = "D7FB1F2E1A893B9A0E80A392473710373DE5791D3AC8F6D898803754B2ADAE6B"
 
 dependencies = [
   { name = "AftermathAmm" },
@@ -14,6 +14,7 @@ dependencies = [
   { name = "InsuranceFund" },
   { name = "ProtocolFeeVault" },
   { name = "ReferralVault" },
+  { name = "StraterLpVault" },
   { name = "Sui" },
   { name = "Treasury" },
 ]
@@ -76,7 +77,7 @@ dependencies = [
 
 [[move.package]]
 name = "CetusClmm"
-source = { local = "cetus-clmm/clmmpool" }
+source = { local = "../cetus-lp-vault/cetus-clmm/clmmpool" }
 
 dependencies = [
   { name = "IntegerMate" },
@@ -86,7 +87,7 @@ dependencies = [
 
 [[move.package]]
 name = "CetusIntegrate"
-source = { local = "cetus-clmm/integrate" }
+source = { local = "../cetus-lp-vault/cetus-clmm/integrate" }
 
 dependencies = [
   { name = "CetusClmm" },
@@ -103,7 +104,7 @@ dependencies = [
 
 [[move.package]]
 name = "IntegerMate"
-source = { local = "cetus-integrate-mate" }
+source = { local = "../cetus-lp-vault/cetus-integer-mate" }
 
 dependencies = [
   { name = "Sui" },
@@ -111,7 +112,7 @@ dependencies = [
 
 [[move.package]]
 name = "MoveSTL"
-source = { local = "cetus-move-stl" }
+source = { local = "../cetus-lp-vault/cetus-move-stl" }
 
 dependencies = [
   { name = "Sui" },
@@ -147,6 +148,15 @@ name = "ReferralVault"
 source = { local = "aftermath-vault/referral-vault" }
 
 dependencies = [
+  { name = "Sui" },
+]
+
+[[move.package]]
+name = "StraterLpVault"
+source = { local = "../cetus-lp-vault" }
+
+dependencies = [
+  { name = "CetusClmm" },
   { name = "Sui" },
 ]
 

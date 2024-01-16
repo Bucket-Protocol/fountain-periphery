@@ -2,8 +2,8 @@
 
 [move]
 version = 0
-manifest_digest = "F86C5299775DA3EC2BB3324BBC57551BADEDB29A97C860B95FCA6148427E44BE"
-deps_digest = "D7FB1F2E1A893B9A0E80A392473710373DE5791D3AC8F6D898803754B2ADAE6B"
+manifest_digest = "127B60FB6E9E15ADB1E16537F6998B818093360A81464F8299D7C82D3C71CB5E"
+deps_digest = "8D8E72BAA06E63572166CA7E7F6E159CA2D11E27ADE3961B15E29922A04B0D32"
 
 dependencies = [
   { name = "AftermathAmm" },
@@ -11,6 +11,7 @@ dependencies = [
   { name = "BucketProtocol" },
   { name = "CetusClmm" },
   { name = "CetusIntegrate" },
+  { name = "CoinTypes" },
   { name = "InsuranceFund" },
   { name = "ProtocolFeeVault" },
   { name = "ReferralVault" },
@@ -91,6 +92,14 @@ source = { local = "../cetus-lp-vault/cetus-clmm/integrate" }
 
 dependencies = [
   { name = "CetusClmm" },
+  { name = "Sui" },
+]
+
+[[move.package]]
+name = "CoinTypes"
+source = { local = "coin-types" }
+
+dependencies = [
   { name = "Sui" },
 ]
 

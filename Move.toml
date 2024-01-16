@@ -19,6 +19,8 @@ CetusIntegrate = { local = "../cetus-lp-vault/cetus-clmm/integrate" }
 BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev = "main" }
 # Strater Cetus Vault
 StraterLpVault = { local = "../cetus-lp-vault" }
+# Coin Types
+CoinTypes = { local = "./coin-types" }
 
 [addresses]
 bucket_fountain_periphery = "0x0"

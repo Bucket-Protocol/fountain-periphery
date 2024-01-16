@@ -11,7 +11,7 @@ module bucket_fountain_periphery::cetus_fountain {
     use bucket_protocol::buck::{Self, BucketProtocol, BUCK};
     use bucket_fountain::fountain_core::{Self, Fountain, StakeProof};
     use strater_lp_vault::bucketus::{Self, BUCKETUS, BucketusTreasury, CetusLpVault};
-    use 0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN as USDC;
+    use usdc_package::coin::COIN as USDC;
 
     const DUST_COLLECTION_ACCOUNT: address = @0xbfd2e22f32d4bcaaf6f12f218fcc26488fdf63f338481e0d4f96e95160d61ba9;
     const UNIT_LIQUIDITY: u128 = 15811389;

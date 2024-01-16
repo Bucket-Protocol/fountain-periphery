@@ -19,8 +19,8 @@ module bucket_fountain_periphery::aftermath_fountain {
     use cetus_integrate::router;
     use cetus_clmm::pool::Pool as CetusPool;
     use cetus_clmm::config::GlobalConfig as CetusConfig;
-    use 0x5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN as USDC;
-    use 0xf1b901d93cc3652ee26e8d88fff8dc7b9402b2b2e71a59b244f938a140affc5e::af_lp::AF_LP;
+    use usdc_package::coin::COIN as USDC;
+    use af_lp_package::af_lp::AF_LP;
 
     const EXPECTED_RATIO: u128 = 1_000_000_000_000_000_000; // 50-50
     const SLIPPAGE: u64 = 5_000_000_000_000_000_000; // 5%

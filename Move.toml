@@ -1,6 +1,8 @@
 [package]
 name = "BucketFountainPeriphery"
-version = "0.0.1"
+version = "0.0.2"
+# published-at = "0x8e8f891d9202c5366bff7c3005761f26a5abedeaf436d76b7d8e8b7794126d7b"
+published-at = "0x8d5c100f70eec682118fab24756fb2540c3aa8de253546022d219d18d68b2b94"
 
 [dependencies]
 Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/mainnet" }
@@ -21,4 +23,5 @@ BucketFountain = { git = "https://github.com/Bucket-Protocol/fountain.git", rev 
 StraterLpVault = { local = "../cetus-lp-vault" }
 
 [addresses]
-bucket_fountain_periphery = "0x0"
+bucket_fountain_periphery = "0x8e8f891d9202c5366bff7c3005761f26a5abedeaf436d76b7d8e8b7794126d7b"
+# bucket_fountain_periphery = "0x0"

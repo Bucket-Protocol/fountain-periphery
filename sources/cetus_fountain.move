@@ -124,4 +124,53 @@ module bucket_fountain_periphery::cetus_fountain {
         let sui_reward = coin::from_balance(sui_reward, ctx);
         transfer::public_transfer(sui_reward, recipient);
     }
+
+    public fun stake_with_slippage<USDC>(
+        protocol: &mut BucketProtocol,
+        fountain: &mut Fountain<BUCKETUS, SUI>,
+        treasury: &mut BucketusTreasury,
+        vault: &mut CetusLpVault,
+        config: &GlobalConfig,
+        pool: &mut Pool<BUCK, USDC>,
+        clock: &Clock,
+        usdc_coin: Coin<USDC>,
+        recipient: address,
+        slippage: u64, // 1 means 0.1%
+        ctx: &mut TxContext,
+    ): Coin<USDC> {
+        let usdc_norm_value = ((coin::value(&usdc_coin) * (1000-slippage)) as u128);
+        let delta_liquidity = (usdc_norm_value as u128) * UNIT_LIQUIDITY / UNIT_OUTPUT;
+        let (bucketus_out, receipt) = bucketus::deposit(
+            treasury,
+            vault,
+            config,
+            pool,
+            delta_liquidity,
+            clock,
+            ctx,
+        );
+        let (buck_amount, usdc_amount) = pool::add_liquidity_pay_amount(&receipt);
+        let usdc_to_charge = coin::split(&mut usdc_coin, buck_amount/999 + 1000, ctx);
+        let buck_all = buck::charge_reservoir<USDC>(protocol, coin::into_balance(usdc_to_charge));
+        let buck_all = coin::from_balance(buck_all, ctx);
+        let buck_in = coin::split(&mut buck_all, buck_amount, ctx);
+        transfer::public_transfer(buck_all, DUST_COLLECTION_ACCOUNT);
+        let usdc_in = coin::split(&mut usdc_coin, usdc_amount, ctx);
+        pool::repay_add_liquidity(
+            config,
+            pool,
+            coin::into_balance(buck_in),
+            coin::into_balance(usdc_in),
+            receipt,
+        );
+        let proof = fountain_core::stake(
+            clock,
+            fountain,
+            coin::into_balance(bucketus_out),
+            MAX_LOCK_TIME,
+            ctx,
+        );
+        transfer::public_transfer(proof, recipient);
+        usdc_coin
+    }
 }
